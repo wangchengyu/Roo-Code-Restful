@@ -21,6 +21,16 @@ export interface RooCodeAPIEvents {
 	taskCompleted: [taskId: string, tokenUsage: TokenUsage, toolUsage: ToolUsage, isSubtask: IsSubtask]
 	taskTokenUsageUpdated: [taskId: string, tokenUsage: TokenUsage]
 	taskToolFailed: [taskId: string, toolName: ToolName, error: string]
+	taskCommandExecuted: [
+		taskId: string,
+		details: {
+			command: string
+			exitCode: number | undefined
+			output: string
+			succeeded: boolean
+			failureReason?: string
+		},
+	]
 }
 
 export interface RooCodeAPI extends EventEmitter<RooCodeAPIEvents> {
